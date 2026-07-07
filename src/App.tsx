@@ -8,43 +8,43 @@ import PromptAuditor from "./components/PromptAuditor";
 export default function App() {
   const [activeTab, setActiveTab] = useState<"pillars" | "simulator" | "auditor">("pillars");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const frostOverlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Setup video properties
+    // Setup video properties for smooth, high-performance forward playback
     video.muted = true;
     video.playsInline = true;
-    // We disable natural loop to handle ping-pong looping ourselves
-    video.loop = false;
+    video.loop = true;
 
     let rafId: number;
-    let direction: "forward" | "reverse" = "forward";
-    let lastTime = performance.now();
 
     const updateLoop = () => {
-      const now = performance.now();
-      const delta = (now - lastTime) / 1000;
-      lastTime = now;
-
       if (!video) return;
 
-      if (direction === "forward") {
-        // When going forward, wait until we are extremely close to the end
-        if (video.duration && video.currentTime >= video.duration - 0.1) {
-          video.pause();
-          direction = "reverse";
+      const t = video.currentTime;
+      const d = video.duration;
+
+      let opacity = 0;
+      if (d && d > 0) {
+        // We trigger a high-quality "frost blur transition" 0.8s before the video loops
+        // and hold it/fade it out during the first 0.8s of the next loop cycle.
+        const transitionWindow = 0.8; 
+        if (t >= d - transitionWindow) {
+          opacity = (t - (d - transitionWindow)) / transitionWindow;
+        } else if (t <= transitionWindow) {
+          opacity = 1 - (t / transitionWindow);
         }
-      } else {
-        // Reverse playback: decrease currentTime manually matching real time
-        if (video.currentTime > 0.05) {
-          video.currentTime = Math.max(0, video.currentTime - delta);
-        } else {
-          video.currentTime = 0;
-          direction = "forward";
-          video.play().catch(() => {});
-        }
+      }
+
+      // Bound opacity exactly between 0 and 1
+      opacity = Math.max(0, Math.min(1, opacity));
+
+      // Direct DOM manipulation for maximum 60FPS performance without React-state render lags
+      if (frostOverlayRef.current) {
+        frostOverlayRef.current.style.opacity = opacity.toString();
       }
 
       rafId = requestAnimationFrame(updateLoop);
@@ -111,6 +111,12 @@ export default function App() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover opacity-95 transform-gpu"
           style={{ transform: "translate3d(0, 0, 0)", willChange: "transform" }}
+        />
+        {/* Seamless Frost Loop Overlay */}
+        <div
+          ref={frostOverlayRef}
+          className="absolute inset-0 bg-neutral-950/40 backdrop-blur-[24px] pointer-events-none"
+          style={{ opacity: 0, willChange: "opacity" }}
         />
         {/* Lighter, softer vignette overlay so the video is clearly visible but white text remains readable */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/10 via-neutral-950/30 to-neutral-950/60 mix-blend-multiply" />
