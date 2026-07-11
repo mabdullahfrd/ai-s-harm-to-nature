@@ -2,5 +2,5 @@
   "name": "AI and Its Harm to Nature",
   "description": "An editorial exploration of artificial intelligence's hidden environmental costs, including data center energy consumption, water cooling demands, and carbon footprints.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": ["ANALYZE_ENVIRONMENTAL_COST_OF_AI"]
 }
