@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Player from "@vimeo/player";
 import { motion, AnimatePresence } from "motion/react";
 import { AlertTriangle, Globe, HelpCircle, ArrowDown, Leaf, Info } from "lucide-react";
 import EditorialPanel from "./components/EditorialPanel";
@@ -7,6 +8,28 @@ import PromptAuditor from "./components/PromptAuditor";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<"pillars" | "simulator" | "auditor">("pillars");
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (iframeRef.current) {
+      const player = new Player(iframeRef.current);
+      
+      const handlePlay = () => setIsVideoLoaded(true);
+      
+      player.on('playing', handlePlay);
+      player.on('play', handlePlay);
+      
+      // Fallback timeout in case autoplay is blocked or slow
+      const timer = setTimeout(() => setIsVideoLoaded(true), 4000);
+
+      return () => {
+        player.off('playing', handlePlay);
+        player.off('play', handlePlay);
+        clearTimeout(timer);
+      };
+    }
+  }, []);
 
   const handleTabChange = (tab: "pillars" | "simulator" | "auditor") => {
     setActiveTab(tab);
@@ -26,15 +49,48 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-transparent text-white font-sans overflow-x-hidden selection:bg-white selection:text-neutral-950" id="main-container">
-      {/* Background Video with subtle overlay filters - Fixed to keep it still relative to scroll */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" id="bg-video-container">
-        <iframe
-          src="https://player.vimeo.com/video/1213078778?background=1&app_id=58479"
-          className="absolute top-1/2 left-1/2 w-[100vw] h-[100vh] min-w-[177.77vh] min-h-[56.25vw] -translate-x-1/2 -translate-y-1/2 opacity-100"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          title="Ai Harm to Nature Background"
-        />
+    <>
+      {/* Loading Screen */}
+      <AnimatePresence>
+        {!isVideoLoaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+          >
+            {/* Background image for loader */}
+            <div 
+              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: "url('/bg-poster.jpg')" }}
+            />
+            {/* Glass Blur Overlay */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-xl" />
+            
+            <div className="relative z-10 flex flex-col items-center gap-6">
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 border-t-2 border-r-2 border-emerald-500 rounded-full animate-spin" />
+                <div className="absolute inset-2 border-b-2 border-l-2 border-emerald-300/50 rounded-full animate-[spin_1.5s_linear_infinite_reverse]" />
+                <Leaf className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
+              </div>
+              <div className="font-mono tracking-[0.2em] text-xs text-emerald-100/70 uppercase">
+                Initializing Connection
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative min-h-screen bg-transparent text-white font-sans overflow-x-hidden selection:bg-white selection:text-neutral-950" id="main-container">
+        {/* Background Video with subtle overlay filters - Fixed to keep it still relative to scroll */}
+        <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" id="bg-video-container">
+          <iframe
+            ref={iframeRef}
+            src="https://player.vimeo.com/video/1213078778?background=1&app_id=58479"
+            className="absolute top-1/2 left-1/2 w-[100vw] h-[100vh] min-w-[177.77vh] min-h-[56.25vw] -translate-x-1/2 -translate-y-1/2 opacity-100"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            title="Ai Harm to Nature Background"
+          />
         {/* Simple dark overlay to ensure text readability without fully obscuring the video */}
         <div className="absolute inset-0 bg-black/20" />
         
@@ -202,5 +258,6 @@ export default function App() {
         </motion.footer>
       </div>
     </div>
+    </>
   );
 }
