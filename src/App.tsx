@@ -61,10 +61,10 @@ export default function App() {
             <img 
               src="/bg-poster.jpg"
               alt=""
-              className="absolute inset-0 w-full h-full object-cover scale-105"
+              className="absolute inset-0 w-full h-full object-cover scale-110 blur-[40px] opacity-70"
             />
-            {/* Glass Blur Overlay */}
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-[60px]" />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
             
             <div className="relative z-10 flex flex-col items-center gap-6">
               <div className="relative w-16 h-16">
