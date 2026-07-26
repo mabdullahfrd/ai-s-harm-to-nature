@@ -79,13 +79,13 @@ export default function PromptAuditor() {
   return (
     <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6 lg:p-8 backdrop-blur-2xl text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative" id="prompt-auditor">
       <div className="border-b border-white/10 pb-4 mb-6">
-        <p className="font-mono text-[10px] tracking-widest text-neutral-400 uppercase">
+        <p className="font-mono text-[10px] tracking-widest text-white uppercase">
           ECOLOGICAL AUDITING
         </p>
         <h2 className="font-serif text-3xl font-normal mt-1 tracking-tight">
           Prompt Footprint Auditor
         </h2>
-        <p className="text-xs text-neutral-400 mt-1 font-light leading-relaxed">
+        <p className="text-xs text-white mt-1 font-light leading-relaxed">
           Input any prompt you intend to run or generate with popular AI engines, and let our audit model compute the precise ecological transaction cost of compiling those specific tokens.
         </p>
       </div>
@@ -94,7 +94,7 @@ export default function PromptAuditor() {
         {/* Auditor Form */}
         <div className="lg:col-span-5 space-y-6" id="auditor-form-panel">
           <div className="space-y-3">
-            <label className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+            <label className="font-mono text-[10px] uppercase text-white tracking-wider">
               01 // Choose Query Type
             </label>
             <div className="grid grid-cols-3 gap-2" id="auditor-type-selectors">
@@ -106,7 +106,7 @@ export default function PromptAuditor() {
                   className={`py-2 px-3 rounded-md text-[11px] font-mono capitalize border transition-all ${
                     type === t
                       ? "border-white/30 bg-white/[0.08] text-white shadow-sm backdrop-blur-lg"
-                      : "border-white/5 bg-white/[0.02] text-neutral-400 hover:bg-white/[0.06] hover:text-white backdrop-blur-sm"
+                      : "border-white/5 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:text-white backdrop-blur-sm"
                   }`}
                 >
                   {t}
@@ -116,7 +116,7 @@ export default function PromptAuditor() {
           </div>
 
           <div className="space-y-3">
-            <label className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+            <label className="font-mono text-[10px] uppercase text-white tracking-wider">
               02 // Enter Planned Prompt
             </label>
             <div className="relative">
@@ -135,7 +135,7 @@ export default function PromptAuditor() {
             id="run-audit-btn"
             disabled={isLoading || !prompt.trim()}
             onClick={() => handleAudit()}
-            className="w-full bg-white text-neutral-950 hover:bg-neutral-200 disabled:bg-white/20 disabled:text-neutral-500 py-3 rounded-lg text-xs font-mono font-medium tracking-wider transition-all flex items-center justify-center gap-2"
+            className="w-full bg-white text-neutral-950 hover:bg-neutral-200 disabled:bg-white/20 disabled:text-white/90 py-3 rounded-lg text-xs font-mono font-medium tracking-wider transition-all flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -152,7 +152,7 @@ export default function PromptAuditor() {
 
           {/* Presets */}
           <div className="space-y-2 pt-2">
-            <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-wider">
+            <span className="font-mono text-[10px] uppercase text-white/90 tracking-wider">
               Or Try Preset Audits:
             </span>
             <div className="space-y-2">
@@ -167,12 +167,12 @@ export default function PromptAuditor() {
                   }}
                   className="w-full text-left p-2.5 rounded border border-white/10 bg-white/[0.01] hover:bg-white/[0.04] transition-all flex items-start gap-2.5 backdrop-blur-sm"
                 >
-                  <CornerDownRight className="w-3 h-3 text-neutral-500 shrink-0 mt-1" />
+                  <CornerDownRight className="w-3 h-3 text-white/90 shrink-0 mt-1" />
                   <div className="space-y-0.5">
                     <p className="text-[11px] text-neutral-300 font-light leading-normal line-clamp-1 italic">
                       "{preset.text}"
                     </p>
-                    <span className="font-mono text-[9px] text-neutral-500 uppercase">
+                    <span className="font-mono text-[9px] text-white/90 uppercase">
                       {preset.type} prompt
                     </span>
                   </div>
@@ -186,10 +186,10 @@ export default function PromptAuditor() {
         <div className="lg:col-span-7" id="auditor-results-panel">
           {isLoading ? (
             <div className="h-full min-h-[300px] bg-white/[0.01] border border-white/10 rounded-xl flex flex-col items-center justify-center p-8 text-center space-y-4 backdrop-blur-md" id="auditor-loading">
-              <Loader2 className="w-8 h-8 text-neutral-400 animate-spin" id="main-loader" />
+              <Loader2 className="w-8 h-8 text-white animate-spin" id="main-loader" />
               <div className="space-y-1">
                 <p className="font-serif text-lg font-light text-neutral-200">Processing Ecological Telemetry</p>
-                <p className="font-mono text-[10px] text-neutral-500 animate-pulse uppercase tracking-wider">
+                <p className="font-mono text-[10px] text-white/90 animate-pulse uppercase tracking-wider">
                   Mapping global grid multipliers // calculating evaporative load
                 </p>
               </div>
@@ -197,7 +197,7 @@ export default function PromptAuditor() {
           ) : result ? (
             <div className="space-y-6" id="auditor-results">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+                <span className="font-mono text-[10px] uppercase text-white tracking-wider">
                   03 // Audit Findings
                 </span>
                 {result.isFallback && (
@@ -210,7 +210,7 @@ export default function PromptAuditor() {
               {/* Infographics layout */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300">
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase block">Electricity Spent</span>
+                  <span className="text-[10px] font-mono text-white/90 uppercase block">Electricity Spent</span>
                   <span className="text-xl font-mono text-neutral-200 block mt-1">{result.energyUsedWh.toFixed(2)} Wh</span>
                   <div className="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
                     <div 
@@ -221,7 +221,7 @@ export default function PromptAuditor() {
                 </div>
 
                 <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300">
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase block">Water Consumption</span>
+                  <span className="text-[10px] font-mono text-white/90 uppercase block">Water Consumption</span>
                   <span className="text-xl font-mono text-neutral-200 block mt-1">{result.waterConsumedMl.toFixed(1)} ml</span>
                   <div className="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
                     <div 
@@ -232,7 +232,7 @@ export default function PromptAuditor() {
                 </div>
 
                 <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300">
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase block">CO2 Equivalent</span>
+                  <span className="text-[10px] font-mono text-white/90 uppercase block">CO2 Equivalent</span>
                   <span className="text-xl font-mono text-neutral-200 block mt-1">{result.carbonIntensityGrams.toFixed(2)} g CO₂</span>
                   <div className="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
                     <div 
@@ -243,7 +243,7 @@ export default function PromptAuditor() {
                 </div>
 
                 <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300">
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase block">Silicon Degradation</span>
+                  <span className="text-[10px] font-mono text-white/90 uppercase block">Silicon Degradation</span>
                   <span className="text-xl font-mono text-neutral-200 block mt-1">{result.eWasteProducedMg.toFixed(3)} mg</span>
                   <div className="w-full bg-white/10 h-1 rounded-full mt-3 overflow-hidden">
                     <div 
@@ -256,7 +256,7 @@ export default function PromptAuditor() {
 
               {/* Ecological breakdown paragraph */}
               <div className="p-4 bg-white/[0.02] border border-white/10 rounded-lg space-y-1 backdrop-blur-sm">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase block">Hardware System Breakdown</span>
+                <span className="text-[9px] font-mono text-white/90 uppercase block">Hardware System Breakdown</span>
                 <p className="font-serif text-sm text-neutral-300 leading-relaxed font-light">
                   {result.ecologicalBreakdown}
                 </p>
@@ -264,11 +264,11 @@ export default function PromptAuditor() {
 
               {/* Comparisons list */}
               <div className="space-y-2">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase block">Relatable Physical equivalencies</span>
+                <span className="text-[9px] font-mono text-white/90 uppercase block">Relatable Physical equivalencies</span>
                 <div className="grid grid-cols-1 gap-2">
                   {result.comparisons.map((comp, idx) => (
                     <div key={idx} className="flex gap-2.5 items-center text-xs text-neutral-300 font-light">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-white/90 shrink-0" />
                       <span>{comp}</span>
                     </div>
                   ))}
@@ -277,11 +277,11 @@ export default function PromptAuditor() {
 
               {/* Mitigation tips */}
               <div className="border-t border-white/10 pt-4 space-y-2">
-                <span className="text-[9px] font-mono text-neutral-400 uppercase block">Audit Optimization Advice</span>
+                <span className="text-[9px] font-mono text-white uppercase block">Audit Optimization Advice</span>
                 <div className="grid grid-cols-1 gap-2">
                   {result.mitigationAdvice.map((advice, idx) => (
-                    <div key={idx} className="flex gap-2.5 items-start text-xs text-neutral-400 font-light">
-                      <ChevronRight className="w-3.5 h-3.5 text-neutral-600 shrink-0 mt-0.5" />
+                    <div key={idx} className="flex gap-2.5 items-start text-xs text-white font-light">
+                      <ChevronRight className="w-3.5 h-3.5 text-white/80 shrink-0 mt-0.5" />
                       <span>{advice}</span>
                     </div>
                   ))}
@@ -289,11 +289,11 @@ export default function PromptAuditor() {
               </div>
             </div>
           ) : (
-            <div className="h-full min-h-[300px] border border-white/10 bg-white/[0.01] rounded-xl flex flex-col items-center justify-center p-8 text-center space-y-4 text-neutral-400 backdrop-blur-md" id="auditor-empty">
-              <BarChart4 className="w-10 h-10 text-neutral-600" id="empty-chart-icon" />
+            <div className="h-full min-h-[300px] border border-white/10 bg-white/[0.01] rounded-xl flex flex-col items-center justify-center p-8 text-center space-y-4 text-white backdrop-blur-md" id="auditor-empty">
+              <BarChart4 className="w-10 h-10 text-white/80" id="empty-chart-icon" />
               <div className="space-y-1">
                 <p className="font-serif text-sm font-light text-neutral-300">Awaiting Telemetry Input</p>
-                <p className="text-xs text-neutral-500 font-light leading-normal max-w-xs">
+                <p className="text-xs text-white/90 font-light leading-normal max-w-xs">
                   Provide a prompt query on the left pane and execute the audit to compute hardware-level environmental footprints.
                 </p>
               </div>

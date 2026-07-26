@@ -72,13 +72,13 @@ export default function InteractiveCalculator() {
   return (
     <div className="bg-white/[0.03] border border-white/10 rounded-xl p-6 lg:p-8 backdrop-blur-2xl text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative" id="interactive-calculator">
       <div className="border-b border-white/10 pb-4 mb-6">
-        <p className="font-mono text-[10px] tracking-widest text-neutral-400 uppercase">
+        <p className="font-mono text-[10px] tracking-widest text-white uppercase">
           FOOTPRINT SIMULATION MODEL
         </p>
         <h2 className="font-serif text-3xl font-normal mt-1 tracking-tight">
           Cumulative Impact Simulator
         </h2>
-        <p className="text-xs text-neutral-400 mt-1 font-light leading-relaxed">
+        <p className="text-xs text-white mt-1 font-light leading-relaxed">
           Select a common workload and scale the volume of occurrences to realize how small, frequent transactions compile into structural environmental footprints.
         </p>
       </div>
@@ -87,7 +87,7 @@ export default function InteractiveCalculator() {
         {/* Step 1: Workload Config */}
         <div className="lg:col-span-5 space-y-6" id="calculator-config">
           <div className="space-y-3">
-            <label className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+            <label className="font-mono text-[10px] uppercase text-white tracking-wider">
               01 // Choose AI Workload
             </label>
             <div className="grid grid-cols-1 gap-2" id="workload-list">
@@ -104,11 +104,11 @@ export default function InteractiveCalculator() {
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-serif text-sm">{task.name}</span>
-                    <span className="font-mono text-[9px] uppercase bg-white/10 px-2 py-0.5 rounded text-neutral-400">
+                    <span className="font-mono text-[9px] uppercase bg-white/10 px-2 py-0.5 rounded text-white">
                       {task.scaleLabel}
                     </span>
                   </div>
-                  <p className="text-[11px] text-neutral-400 font-light leading-normal line-clamp-1">
+                  <p className="text-[11px] text-white font-light leading-normal line-clamp-1">
                     {task.description}
                   </p>
                 </button>
@@ -118,7 +118,7 @@ export default function InteractiveCalculator() {
 
           <div className="space-y-3 pt-2">
             <div className="flex justify-between items-center">
-              <label className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+              <label className="font-mono text-[10px] uppercase text-white tracking-wider">
                 02 // Scale Transaction Volume
               </label>
               <span className="font-mono text-xs text-neutral-100 font-semibold bg-white/5 px-2.5 py-1 rounded border border-white/10">
@@ -138,7 +138,7 @@ export default function InteractiveCalculator() {
                 onChange={(e) => setMultiplier(parseInt(e.target.value))}
                 className="w-full accent-white h-1.5 bg-white/10 rounded-lg cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-neutral-500">
+              <div className="flex justify-between text-[10px] font-mono text-white/90">
                 <span>1 Run</span>
                 <span>10k Runs</span>
                 <span>50k Runs</span>
@@ -152,7 +152,7 @@ export default function InteractiveCalculator() {
                 id="preset-1"
                 onClick={() => setMultiplier(1)}
                 className={`px-3 py-1 rounded font-mono text-[10px] border transition-all ${
-                  multiplier === 1 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-neutral-400 border-white/10 hover:text-white"
+                  multiplier === 1 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-white border-white/10 hover:text-white"
                 }`}
               >
                 1 Run
@@ -161,7 +161,7 @@ export default function InteractiveCalculator() {
                 id="preset-1000"
                 onClick={() => setMultiplier(1000)}
                 className={`px-3 py-1 rounded font-mono text-[10px] border transition-all ${
-                  multiplier === 1000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-neutral-400 border-white/10 hover:text-white"
+                  multiplier === 1000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-white border-white/10 hover:text-white"
                 }`}
               >
                 1,000 Runs
@@ -170,7 +170,7 @@ export default function InteractiveCalculator() {
                 id="preset-10000"
                 onClick={() => setMultiplier(10000)}
                 className={`px-3 py-1 rounded font-mono text-[10px] border transition-all ${
-                  multiplier === 10000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-neutral-400 border-white/10 hover:text-white"
+                  multiplier === 10000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-white border-white/10 hover:text-white"
                 }`}
               >
                 10,000 Runs
@@ -179,7 +179,7 @@ export default function InteractiveCalculator() {
                 id="preset-100000"
                 onClick={() => setMultiplier(1000000)}
                 className={`px-3 py-1 rounded font-mono text-[10px] border transition-all ${
-                  multiplier === 1000000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-neutral-400 border-white/10 hover:text-white"
+                  multiplier === 1000000 ? "bg-white text-neutral-950 border-white" : "bg-white/5 text-white border-white/10 hover:text-white"
                 }`}
               >
                 1M Runs (Corporate Scale)
@@ -191,7 +191,7 @@ export default function InteractiveCalculator() {
         {/* Step 2: Footprint Breakdown Metrics */}
         <div className="lg:col-span-7 bg-white/[0.01] border border-white/10 rounded-xl p-5 lg:p-6 space-y-6 flex flex-col justify-between backdrop-blur-md shadow-inner" id="calculator-metrics">
           <div className="space-y-4">
-            <span className="font-mono text-[10px] uppercase text-neutral-400 tracking-wider">
+            <span className="font-mono text-[10px] uppercase text-white tracking-wider">
               03 // Compiled Footprint Metrics
             </span>
 
@@ -199,11 +199,11 @@ export default function InteractiveCalculator() {
               {/* Carbon */}
               <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg shadow-sm backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300" id="carbon-box">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs text-neutral-400 font-light">Carbon Footprint</span>
+                  <span className="text-xs text-white font-light">Carbon Footprint</span>
                   <Flame className="w-4 h-4 text-rose-400" id="flame-icon" />
                 </div>
                 <p className="font-mono text-2xl font-normal text-neutral-100">{formatCarbon(totals.carbon)}</p>
-                <p className="text-[11px] text-neutral-400 mt-1.5 font-light leading-normal">
+                <p className="text-[11px] text-white mt-1.5 font-light leading-normal">
                   Requires roughly <span className="text-rose-400 font-mono font-medium">{totals.carMiles.toFixed(1)} miles</span> of fossil-fuel car travel equivalent.
                 </p>
               </div>
@@ -211,11 +211,11 @@ export default function InteractiveCalculator() {
               {/* Energy */}
               <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg shadow-sm backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300" id="energy-box">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs text-neutral-400 font-light">Electricity Used</span>
+                  <span className="text-xs text-white font-light">Electricity Used</span>
                   <Activity className="w-4 h-4 text-amber-400" id="activity-icon" />
                 </div>
                 <p className="font-mono text-2xl font-normal text-neutral-100">{formatEnergy(totals.energy)}</p>
-                <p className="text-[11px] text-neutral-400 mt-1.5 font-light leading-normal">
+                <p className="text-[11px] text-white mt-1.5 font-light leading-normal">
                   Enough to keep a 10W household lightbulb illuminated for <span className="text-amber-400 font-mono font-medium">{(totals.energy / 10).toFixed(1)} hours</span>.
                 </p>
               </div>
@@ -223,11 +223,11 @@ export default function InteractiveCalculator() {
               {/* Water */}
               <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg shadow-sm backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300" id="water-box">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs text-neutral-400 font-light">Freshwater Cooling</span>
+                  <span className="text-xs text-white font-light">Freshwater Cooling</span>
                   <CloudRain className="w-4 h-4 text-cyan-400" id="rain-icon" />
                 </div>
                 <p className="font-mono text-2xl font-normal text-neutral-100">{formatWater(totals.water)}</p>
-                <p className="text-[11px] text-neutral-400 mt-1.5 font-light leading-normal">
+                <p className="text-[11px] text-white mt-1.5 font-light leading-normal">
                   Equivalent to drinking <span className="text-cyan-400 font-mono font-medium">{totals.waterBottles.toFixed(1)}</span> standard 500ml mineral water bottles.
                 </p>
               </div>
@@ -235,11 +235,11 @@ export default function InteractiveCalculator() {
               {/* E-Waste */}
               <div className="p-4 bg-white/[0.03] border border-white/10 rounded-lg shadow-sm backdrop-blur-md hover:bg-white/[0.05] transition-all duration-300" id="ewaste-box">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs text-neutral-400 font-light">Silicon Depreciation</span>
+                  <span className="text-xs text-white font-light">Silicon Depreciation</span>
                   <Globe className="w-4 h-4 text-emerald-400" id="globe-icon" />
                 </div>
                 <p className="font-mono text-2xl font-normal text-neutral-100">{formatEWaste(totals.eWaste)}</p>
-                <p className="text-[11px] text-neutral-400 mt-1.5 font-light leading-normal">
+                <p className="text-[11px] text-white mt-1.5 font-light leading-normal">
                   GPU structural material wear over hardware service lifetimes.
                 </p>
               </div>
@@ -247,8 +247,8 @@ export default function InteractiveCalculator() {
           </div>
 
           <div className="p-4 bg-white/[0.01] border border-white/5 rounded-lg flex items-start gap-3 mt-4 backdrop-blur-sm">
-            <Info className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" id="info-icon" />
-            <p className="text-[11px] text-neutral-400 leading-relaxed font-light">
+            <Info className="w-4 h-4 text-white shrink-0 mt-0.5" id="info-icon" />
+            <p className="text-[11px] text-white leading-relaxed font-light">
               <span className="text-neutral-200 font-medium font-sans">The scaling effect:</span> Standard models process billions of automated API requests per second globally. A task that feels harmless in isolation emits thousands of tons of atmospheric carbon when deployed to consumer products.
             </p>
           </div>

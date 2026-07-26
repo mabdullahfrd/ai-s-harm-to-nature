@@ -29,7 +29,7 @@ export default function EditorialPanel() {
       {/* Sidebar - Topic Selectors */}
       <div className="lg:col-span-4 space-y-4" id="editorial-sidebar">
         <div className="border-b border-white/10 pb-4 mb-6">
-          <p className="font-mono text-[10px] tracking-widest text-neutral-400 uppercase">
+          <p className="font-mono text-[10px] tracking-widest text-white uppercase">
             ECOLOGICAL AUDITING
           </p>
           <h2 className="font-serif text-3xl font-normal mt-1 tracking-tight">
@@ -57,14 +57,14 @@ export default function EditorialPanel() {
                     <h3 className="font-sans font-medium text-sm text-neutral-100">
                       {topic.title}
                     </h3>
-                    <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1 font-light">
+                    <p className="text-xs text-white mt-0.5 line-clamp-1 font-light">
                       {topic.subtitle}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  {getIcon(topic.iconName, `w-4 h-4 ${isSelected ? "text-white" : "text-neutral-400"}`)}
-                  <ChevronRight className={`w-3 h-3 text-neutral-500 transition-transform ${isSelected ? "rotate-90 text-white" : ""}`} />
+                  {getIcon(topic.iconName, `w-4 h-4 ${isSelected ? "text-white" : "text-white"}`)}
+                  <ChevronRight className={`w-3 h-3 text-white/90 transition-transform ${isSelected ? "rotate-90 text-white" : ""}`} />
                 </div>
                 {isSelected && (
                   <motion.div
@@ -85,7 +85,7 @@ export default function EditorialPanel() {
               <h4 className="font-sans font-medium text-xs text-neutral-200">
                 Hidden Infrastructures
               </h4>
-              <p className="text-[11px] text-neutral-400 leading-relaxed mt-1">
+              <p className="text-[11px] text-white leading-relaxed mt-1">
                 Every calculation we execute triggers a complex global supply chain spanning rare-earth open-pit mines, local aquifers, and coal-fired high-baseload utility grids.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function EditorialPanel() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 {getIcon(currentTopic.iconName, "w-5 h-5 text-white/80")}
-                <span className="font-mono text-xs tracking-wider uppercase text-neutral-400">
+                <span className="font-mono text-xs tracking-wider uppercase text-white">
                   {currentTopic.subtitle}
                 </span>
               </div>
@@ -123,7 +123,7 @@ export default function EditorialPanel() {
             {/* Impact Metric Hero */}
             <div className={`p-5 rounded-lg border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-md shadow-inner shadow-black/20 ${currentTopic.colorTheme}`} id="impact-metric-box">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 block mb-1">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-white block mb-1">
                   CRITICAL THRESHOLD
                 </span>
                 <p className="font-serif text-3xl lg:text-4xl font-semibold tracking-tight leading-none">
@@ -144,13 +144,13 @@ export default function EditorialPanel() {
 
             {/* Detailed Points */}
             <div className="space-y-4 border-t border-white/10 pt-6">
-              <h4 className="font-mono text-[10px] tracking-wider text-neutral-400 uppercase">
+              <h4 className="font-mono text-[10px] tracking-wider text-white uppercase">
                 Systemic Ecological Impact
               </h4>
               <ul className="space-y-4">
                 {currentTopic.details.map((detail, idx) => (
                   <li key={idx} className="flex gap-3 items-start text-sm leading-relaxed text-neutral-300">
-                    <span className="font-mono text-xs text-neutral-500 mt-1">0{idx + 1}.</span>
+                    <span className="font-mono text-xs text-white/90 mt-1">0{idx + 1}.</span>
                     <span className="font-light">{detail}</span>
                   </li>
                 ))}
@@ -160,7 +160,7 @@ export default function EditorialPanel() {
         </AnimatePresence>
 
         {/* Footnote */}
-        <div className="border-t border-white/10 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[11px] text-neutral-500 font-mono" id="editorial-footer">
+        <div className="border-t border-white/10 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[11px] text-white/90 font-mono" id="editorial-footer">
           <span>Source: IPCC & Independent Digital Infrastructure Audits</span>
           <span>Sustained Peak Thermal Density // AI-Grid Model</span>
         </div>

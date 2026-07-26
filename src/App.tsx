@@ -18,14 +18,12 @@ export default function App() {
       const handlePlay = () => setIsVideoLoaded(true);
       
       player.on('playing', handlePlay);
-      player.on('play', handlePlay);
       
-      // Fallback timeout in case autoplay is blocked or slow
-      const timer = setTimeout(() => setIsVideoLoaded(true), 4000);
+      // Fallback timeout in case autoplay is blocked or extremely slow
+      const timer = setTimeout(() => setIsVideoLoaded(true), 15000);
 
       return () => {
         player.off('playing', handlePlay);
-        player.off('play', handlePlay);
         clearTimeout(timer);
       };
     }
@@ -61,11 +59,11 @@ export default function App() {
           >
             {/* Background image for loader */}
             <div 
-              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat scale-105"
               style={{ backgroundImage: "url('/bg-poster.jpg')" }}
             />
             {/* Glass Blur Overlay */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-black/30 backdrop-blur-[40px]" />
             
             <div className="relative z-10 flex flex-col items-center gap-6">
               <div className="relative w-16 h-16">
@@ -111,7 +109,7 @@ export default function App() {
           id="app-header"
         >
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-neutral-400">
+            <div className="flex items-center gap-2 text-white">
               <Leaf className="w-3.5 h-3.5 text-emerald-500/80" id="leaf-header-icon" />
               <span className="font-mono text-[9px] tracking-widest uppercase text-emerald-400/80">
                 A Systemic Ecological Investigation
@@ -133,7 +131,7 @@ export default function App() {
               id="nav-btn-pillars"
               onClick={() => handleTabChange("pillars")}
               className={`px-4 py-2 rounded-md font-mono text-[10px] tracking-wider uppercase transition-all duration-300 relative ${
-                activeTab === "pillars" ? "text-neutral-950" : "text-neutral-400 hover:text-white"
+                activeTab === "pillars" ? "text-neutral-950" : "text-white hover:text-white"
               }`}
             >
               {activeTab === "pillars" && (
@@ -149,7 +147,7 @@ export default function App() {
               id="nav-btn-simulator"
               onClick={() => handleTabChange("simulator")}
               className={`px-4 py-2 rounded-md font-mono text-[10px] tracking-wider uppercase transition-all duration-300 relative ${
-                activeTab === "simulator" ? "text-neutral-950" : "text-neutral-400 hover:text-white"
+                activeTab === "simulator" ? "text-neutral-950" : "text-white hover:text-white"
               }`}
             >
               {activeTab === "simulator" && (
@@ -165,7 +163,7 @@ export default function App() {
               id="nav-btn-auditor"
               onClick={() => handleTabChange("auditor")}
               className={`px-4 py-2 rounded-md font-mono text-[10px] tracking-wider uppercase transition-all duration-300 relative ${
-                activeTab === "auditor" ? "text-neutral-950" : "text-neutral-400 hover:text-white"
+                activeTab === "auditor" ? "text-neutral-950" : "text-white hover:text-white"
               }`}
             >
               {activeTab === "auditor" && (
@@ -189,13 +187,13 @@ export default function App() {
           id="hero-prose"
         >
           <div>
-            <p className="font-mono text-[10px] tracking-widest text-neutral-400 uppercase mb-3">
+            <p className="font-mono text-[10px] tracking-widest text-white uppercase mb-3">
               THE PHYSICAL REALITY OF COGNITIVE COMPUTATION
             </p>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-neutral-100 leading-tight tracking-tight">
               Behind the frictionless facade of artificial intelligence lies a material world of gas grids, boiling river basins, and intensive silicon extraction.
             </h2>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 text-neutral-400 text-xs font-light leading-relaxed">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6 text-white text-xs font-light leading-relaxed">
               <span className="flex items-center gap-1.5 text-amber-500 font-mono text-[10px] uppercase tracking-wider bg-amber-950/20 border border-amber-500/20 px-2.5 py-0.5 rounded">
                 <AlertTriangle className="w-3 h-3" /> Critical Ecological Alert
               </span>
@@ -236,22 +234,22 @@ export default function App() {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" id="live-indicator-dot" />
-              <p className="font-mono text-[10px] tracking-wider text-neutral-400 uppercase">
+              <p className="font-mono text-[10px] tracking-wider text-white uppercase">
                 System Active // Ecological Audit Model 2026
               </p>
             </div>
-            <p className="text-[11px] text-neutral-500 font-light leading-normal max-w-md">
+            <p className="text-[11px] text-white/90 font-light leading-normal max-w-md">
               A documentary investigation tracking generative computing's expansion across national power grids, local river cooling sheds, and toxic hardware lifecycles.
             </p>
           </div>
 
-          <div className="flex gap-4 font-mono text-[10px] text-neutral-500" id="footer-system-telemetry">
+          <div className="flex gap-4 font-mono text-[10px] text-white/90" id="footer-system-telemetry">
             <div className="text-left">
-              <span className="block text-neutral-400 uppercase">CONTAINER STATUS</span>
+              <span className="block text-white uppercase">CONTAINER STATUS</span>
               <span>GRID STABILITY OK</span>
             </div>
             <div className="text-left border-l border-white/10 pl-4">
-              <span className="block text-neutral-400 uppercase">EMISSIONS INDEX</span>
+              <span className="block text-white uppercase">EMISSIONS INDEX</span>
               <span>0.42g CO2/Wh avg</span>
             </div>
           </div>
