@@ -58,12 +58,13 @@ export default function App() {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black"
           >
             {/* Background image for loader */}
-            <div 
-              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat scale-105"
-              style={{ backgroundImage: "url('/bg-poster.jpg')" }}
+            <img 
+              src="/bg-poster.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover scale-105"
             />
             {/* Glass Blur Overlay */}
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-[40px]" />
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-[60px]" />
             
             <div className="relative z-10 flex flex-col items-center gap-6">
               <div className="relative w-16 h-16">
