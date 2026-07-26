@@ -8,49 +8,17 @@ import PromptAuditor from "./components/PromptAuditor";
 export default function App() {
   const [activeTab, setActiveTab] = useState<"pillars" | "simulator" | "auditor">("pillars");
   const videoRef = useRef<HTMLVideoElement>(null);
-  const frostOverlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Setup video properties for smooth, high-performance forward playback
+    // Setup video properties
     video.muted = true;
     video.playsInline = true;
     video.loop = true;
 
-    let rafId: number;
-
-    const updateLoop = () => {
-      if (!video) return;
-
-      const t = video.currentTime;
-      const d = video.duration;
-
-      let opacity = 0;
-      if (d && d > 0) {
-        // We trigger a high-quality "frost blur transition" 0.8s before the video loops
-        // and hold it/fade it out during the first 0.8s of the next loop cycle.
-        const transitionWindow = 0.8; 
-        if (t >= d - transitionWindow) {
-          opacity = (t - (d - transitionWindow)) / transitionWindow;
-        } else if (t <= transitionWindow) {
-          opacity = 1 - (t / transitionWindow);
-        }
-      }
-
-      // Bound opacity exactly between 0 and 1
-      opacity = Math.max(0, Math.min(1, opacity));
-
-      // Direct DOM manipulation for maximum 60FPS performance without React-state render lags
-      if (frostOverlayRef.current) {
-        frostOverlayRef.current.style.opacity = opacity.toString();
-      }
-
-      rafId = requestAnimationFrame(updateLoop);
-    };
-
-    // Single click/touch fallback to ensure autoplay policy constraints are satisfied gracefully
+    // Initial unlock for strict browsers
     const startPlayback = () => {
       if (video && video.paused) {
         video.play().catch(() => {});
@@ -59,19 +27,13 @@ export default function App() {
       document.removeEventListener("touchstart", startPlayback);
     };
 
-    video.play()
-      .then(() => {
-        rafId = requestAnimationFrame(updateLoop);
-      })
-      .catch((err) => {
-        console.log("Autoplay waiting for user gesture:", err);
-        document.addEventListener("click", startPlayback);
-        document.addEventListener("touchstart", startPlayback);
-        rafId = requestAnimationFrame(updateLoop);
-      });
+    video.play().catch((err) => {
+      console.log("Autoplay waiting for user gesture:", err);
+      document.addEventListener("click", startPlayback);
+      document.addEventListener("touchstart", startPlayback);
+    });
 
     return () => {
-      cancelAnimationFrame(rafId);
       document.removeEventListener("click", startPlayback);
       document.removeEventListener("touchstart", startPlayback);
     };
@@ -104,23 +66,16 @@ export default function App() {
       <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0" id="bg-video-container">
         <video
           ref={videoRef}
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260520_111942_8fc50f9e-4dfd-45c1-81bb-d93342a23d87.mp4"
+          src="/bg-video-mobile.mp4"
           autoPlay
           muted
+          loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-95 transform-gpu"
-          style={{ transform: "translate3d(0, 0, 0)", willChange: "transform" }}
+          className="absolute inset-0 w-full h-full object-cover opacity-100 transform-gpu"
         />
-        {/* Seamless Frost Loop Overlay */}
-        <div
-          ref={frostOverlayRef}
-          className="absolute inset-0 bg-neutral-950/40 backdrop-blur-[24px] pointer-events-none"
-          style={{ opacity: 0, willChange: "opacity" }}
-        />
-        {/* Lighter, softer vignette overlay so the video is clearly visible but white text remains readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/10 via-neutral-950/30 to-neutral-950/60 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/50" />
+        {/* Simple dark overlay to ensure text readability without fully obscuring the video */}
+        <div className="absolute inset-0 bg-black/40" />
         
         {/* Ambient lighting glows (Frosted Glass Theme) - Made more transparent */}
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-glow-green blur-[100px] opacity-40" />
