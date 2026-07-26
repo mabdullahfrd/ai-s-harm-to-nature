@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { AlertTriangle, Globe, HelpCircle, ArrowDown, Leaf, Info } from "lucide-react";
 import EditorialPanel from "./components/EditorialPanel";
@@ -7,44 +7,9 @@ import PromptAuditor from "./components/PromptAuditor";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<"pillars" | "simulator" | "auditor">("pillars");
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Setup video properties
-    video.muted = true;
-    video.playsInline = true;
-    video.loop = true;
-
-    // Initial unlock for strict browsers
-    const startPlayback = () => {
-      if (video && video.paused) {
-        video.play().catch(() => {});
-      }
-      document.removeEventListener("click", startPlayback);
-      document.removeEventListener("touchstart", startPlayback);
-    };
-
-    video.play().catch((err) => {
-      console.log("Autoplay waiting for user gesture:", err);
-      document.addEventListener("click", startPlayback);
-      document.addEventListener("touchstart", startPlayback);
-    });
-
-    return () => {
-      document.removeEventListener("click", startPlayback);
-      document.removeEventListener("touchstart", startPlayback);
-    };
-  }, []);
 
   const handleTabChange = (tab: "pillars" | "simulator" | "auditor") => {
     setActiveTab(tab);
-    const video = videoRef.current;
-    if (video && video.paused) {
-      video.play().catch(() => {});
-    }
   };
 
   const renderActiveView = () => {
@@ -61,21 +26,17 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0c110c] text-white font-sans overflow-x-hidden selection:bg-white selection:text-neutral-950" id="main-container">
+    <div className="relative min-h-screen bg-transparent text-white font-sans overflow-x-hidden selection:bg-white selection:text-neutral-950" id="main-container">
       {/* Background Video with subtle overlay filters - Fixed to keep it still relative to scroll */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0" id="bg-video-container">
-        <video
-          ref={videoRef}
-          src="/bg-video-mobile.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-100 transform-gpu"
+      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-10" id="bg-video-container">
+        <iframe
+          src="https://player.vimeo.com/video/1213078778?background=1&app_id=58479"
+          className="absolute top-1/2 left-1/2 w-[100vw] h-[100vh] min-w-[177.77vh] min-h-[56.25vw] -translate-x-1/2 -translate-y-1/2 opacity-100"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          title="Ai Harm to Nature Background"
         />
         {/* Simple dark overlay to ensure text readability without fully obscuring the video */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/20" />
         
         {/* Ambient lighting glows (Frosted Glass Theme) - Made more transparent */}
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-glow-green blur-[100px] opacity-40" />
