@@ -137,9 +137,9 @@ src/
 
 # Running Locally
 
-Watch the live DEMO AT
-Clone the repository.(https://ai-s-harm-to-nature.vercel.app/)
+Watch the live DEMO AT(https://ai-s-harm-to-nature.vercel.app/)
 
+Clone the repository.
 ```bash
 git clone https://github.com/yourusername/ai-s-harm-to-nature.git
 ```
