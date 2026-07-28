@@ -55,16 +55,16 @@ export default function App() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-950"
           >
             {/* Background image for loader */}
             <img 
               src="/bg-poster.jpg"
               alt=""
-              className="absolute inset-0 w-full h-full object-cover scale-110 blur-[40px] opacity-70"
+              className="absolute inset-0 w-full h-full object-cover scale-105"
             />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
+            {/* Glass Blur Overlay */}
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-[60px]" />
             
             <div className="relative z-10 flex flex-col items-center gap-6">
               <div className="relative w-16 h-16">
